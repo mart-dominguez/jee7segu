@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>
         <h:form>
-            <h:commandLink value="nueva operacion" action="#{calc.nueva}"></h:commandLink>
+            <h:commandLink value="nueva operacion " action="#{calc.nueva}"></h:commandLink>
+            <h:link value=" | listar historial" outcome="historial.xhtml"> </h:link>
             <h:panelGrid columns="2">
             <h:outputText value="Operador 1"></h:outputText>
             <h:inputText value="#{calc.operacion.operador1}" disabled="#{empty calc.operacion}"></h:inputText>

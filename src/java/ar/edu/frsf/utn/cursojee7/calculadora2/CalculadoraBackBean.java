@@ -7,7 +7,10 @@
 package ar.edu.frsf.utn.cursojee7.calculadora2;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -22,9 +25,17 @@ public class CalculadoraBackBean implements Serializable{
     private List<Operacion> historialOperaciones;
     private Operacion operacion;
     
+    @PostConstruct
+    public void iniciar(){
+        this.historialOperaciones = new ArrayList<Operacion>();
+    }
+    
     public String sumar(){
         // aqui insertaremos la lógica para los calculos.
         this.operacion.setResultado(operacion.getOperador1()+operacion.getOperador2());
+        this.operacion.setFecha(new Date());
+        this.operacion.setTipoOperacion("SUMA");
+        this.historialOperaciones.add(operacion);
         return null;
     }
 
@@ -32,6 +43,25 @@ public class CalculadoraBackBean implements Serializable{
         this.operacion = new  Operacion();
         return null;
     }
+    
+    public String borrar(){
+        int indiceElemento = this.buscarIndiceOperacion();
+        this.historialOperaciones.remove(indiceElemento);
+        return null;
+    }
+    
+
+    private int buscarIndiceOperacion(){
+        int indice =0;
+        for(Operacion unaOp : this.historialOperaciones){
+            if(unaOp.getFecha()==this.operacion.getFecha() && this.operacion.getResultado() == unaOp.getResultado()){
+                return indice;
+            }
+            indice++;
+        }
+        return indice;
+    }
+    
     /**
      * @return the historialOperaciones
      */

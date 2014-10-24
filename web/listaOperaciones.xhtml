@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <ui:composition>
+            <h:form>
+            <h:dataTable value="#{calc.historialOperaciones}" var="unaOp">
+                <h:column>
+                    <f:facet name="header">
+                        Operador 1
+                    </f:facet>
+                    #{unaOp.operador1}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operador 2
+                    </f:facet>
+                    #{unaOp.operador2}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Resultado
+                    </f:facet>
+                    #{unaOp.resultado}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Fecha
+                    </f:facet>
+                    #{unaOp.fecha}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Acciones
+                    </f:facet>
+                    <h:commandLink action="#{calc.borrar}" value="Borrar">
+                        <f:setPropertyActionListener target="#{calc.operacion}" value="#{unaOp}"></f:setPropertyActionListener>
+                    </h:commandLink>
+                </h:column>
+
+            </h:dataTable>
+                </h:form>
+        </ui:composition>
+    </body>
+</html>
